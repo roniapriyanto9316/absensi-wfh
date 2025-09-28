@@ -1,0 +1,48 @@
+services:
+  redis:
+    image: redis:latest
+    ports:
+      - '6379:6379'
+
+  gateway:
+    build: ./gateway
+    ports:
+      - '3000:3000'
+    env_file:
+      - .env
+    depends_on:
+      - redis
+      - user-service
+      - attendance-service
+      - auth-service
+      - audit-log-service
+
+  attendance-service:
+    build: ./attendance-service
+    env_file:
+      - .env
+    depends_on:
+      - redis
+
+  user-service:
+    build: ./user-service
+    env_file:
+      - .env
+    depends_on:
+      - redis
+
+  auth-service:
+    build: ./auth-service
+    env_file:
+      - .env
+    depends_on:
+      - redis
+
+  audit-log-service:
+    build: ./audit-log-service
+    env_file:
+      - .env
+    depends_on:
+      - redis
+
+

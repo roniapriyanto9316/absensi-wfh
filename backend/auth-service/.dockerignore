@@ -1,0 +1,27 @@
+# Node modules & dependencies
+node_modules
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# Environment files (jangan ikut build image)
+.env
+.env.* 
+
+# Build artifacts
+dist
+coverage
+
+# OS / Editor junk
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Docker sendiri
+docker-compose*.yml
+Dockerfile*
+
+# Git
+.git
+.gitignore
