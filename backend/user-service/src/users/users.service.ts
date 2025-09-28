@@ -22,6 +22,10 @@ export class UsersService {
   async findByEmail(email: string) {
     return this.userRepo.findOneBy({ email });
   }
+  
+  async findById(id: number) {
+    return this.userRepo.findOne({ where: { id: id } });
+  }
 
   async findAll() {
     return this.userRepo.find();
@@ -36,12 +40,10 @@ export class UsersService {
 
     if (data.phone !== undefined) user.phone = data.phone;
     if (data.photo !== undefined) user.photo = data.photo;
-    if (data.password !== undefined) {
+    if (data.password !== undefined && data.password.trim() !== "") {
       user.password = await bcrypt.hash(data.password, 10);
-
-    return this.userRepo.save(user);
-    
     }
+    return this.userRepo.save(user);
   }
 
 }

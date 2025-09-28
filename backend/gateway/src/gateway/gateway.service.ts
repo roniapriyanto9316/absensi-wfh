@@ -56,6 +56,14 @@ export class GatewayService {
     return firstValueFrom(this.userClient.send({ cmd: 'get-user-by-email' }, email));
   }
 
+  async findUserById(id: string) {
+    return firstValueFrom(this.userClient.send({ cmd: 'get-user-by-id' }, id));
+  }
+
+  async findAllUsers() {
+    return firstValueFrom(this.userClient.send({ cmd: 'get-all-users' }, {}));
+  }
+
   async createAttendance(data: { userId: number; type: 'clockin' | 'clockout'; note?: string }) {
     const userId = data.userId;
     const observable = this.attendanceClient.send(

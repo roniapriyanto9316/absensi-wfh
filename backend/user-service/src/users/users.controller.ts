@@ -17,6 +17,11 @@ export class UsersController {
     return this.usersService.findByEmail(email);
   }
 
+  @MessagePattern({ cmd: 'get-user-by-id' })
+  async findBy(id: number) {
+    return this.usersService.findById(id);
+  }
+
   @MessagePattern({ cmd: 'get-all-users' })
   async findAll() {
     return this.usersService.findAll();

@@ -1,4 +1,4 @@
-import { Controller, Post, Body, UseGuards, Req, Put  } from '@nestjs/common';
+import { Controller, Post, Body, Get, UseGuards, Req, Put, Param  } from '@nestjs/common';
 import { GatewayService } from './gateway.service';
 import { JwtAuthGuard } from '../jwt-auth.guard';
 
@@ -12,6 +12,12 @@ export class GatewayController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @Get('users')
+  async findAllUsers(@Req() req) {
+    return this.gatewayService.findAllUsers();
+  }
+
+  @UseGuards(JwtAuthGuard)
   @Post('users')
   async createUser(
     @Req() req,
@@ -19,6 +25,16 @@ export class GatewayController {
   ) {
     const userId = req.user.sub;
     return this.gatewayService.createUser(userId, body);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('users/:id')
+  async getUser(
+    @Req() req,
+    @Param('id') id: string,
+  ) {
+    const userId = id ?? req.user.sub;
+    return this.gatewayService.findUserById(userId);
   }
 
   @Post('users/bypass')

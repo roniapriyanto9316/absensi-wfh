@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import {
   CCard,
   CCardBody,
@@ -21,7 +21,22 @@ export default function History() {
   const [endDate, setEndDate] = useState("")
   const [userId, setUserId] = useState("")
   const [history, setHistory] = useState([])
+  const [users, setUsers] = useState([])
 
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const token = localStorage.getItem("token")
+        const res = await api.get("/users", {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        setUsers(res.data)
+      } catch (err) {
+        console.error("❌ Gagal ambil user:", err)
+      }
+    }
+    fetchUsers()
+  }, [])
   const handleFilter = async (e) => {
     e.preventDefault()
     try {
@@ -75,10 +90,11 @@ export default function History() {
                 onChange={(e) => setUserId(e.target.value)}
               >
                 <option value="">-- Semua User --</option>
-                <option value="1">User 1</option>
-                <option value="2">User 2</option>
-                <option value="3">User 3</option>
-                {/* TODO: Bisa diisi otomatis dari API users */}
+                {users.map((u) => (
+                  <option key={u.id} value={u.id}>
+                    {u.name} ({u.email})
+                  </option>
+                ))}
               </CFormSelect>
             </div>
             <div className="col-md-3 d-flex align-items-end">
