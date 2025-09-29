@@ -8,6 +8,8 @@ import Login from "./pages/Login"
 import Dashboard from "./pages/Dashboard"
 import History from "./pages/History"
 import Profile from "./pages/Profile"
+import MyHistory from "./pages/MyHistory"
+import AddUser from "./pages/AddUser"
 
 function PrivateRoute({ children }) {
   const token = localStorage.getItem("token")
@@ -36,7 +38,9 @@ function App() {
                     <Routes>
                       <Route path="/" element={<Dashboard />} />
                       <Route path="/dashboard" element={<Dashboard />} />
+                      <Route path="/myhistory" element={<MyHistory />} />
                       <Route path="/history" element={<History />} />
+                      <Route path="/adduser" element={<AddUser />} />
                       <Route path="/profile" element={<Profile />} />
                       <Route path="*" element={<p>404 Page Not Found</p>} />
                     </Routes>

@@ -17,7 +17,13 @@ export default function AppHeader() {
           <CNavLink href="/">Dashboard</CNavLink>
         </CNavItem>
         <CNavItem>
-          <CNavLink href="/history">History</CNavLink>
+          <CNavLink href="/myhistory">My History</CNavLink>
+        </CNavItem>
+        <CNavItem>
+          <CNavLink href="/history">History (Admin)</CNavLink>
+        </CNavItem>
+        <CNavItem>
+          <CNavLink href="/adduser">Add User (Admin)</CNavLink>
         </CNavItem>
         <CNavItem>
           <CNavLink href="/profile">Profile</CNavLink>
