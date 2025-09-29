@@ -23,9 +23,6 @@ export default function AppHeader() {
     }
   }
 
-  // Fungsi helper cek apakah admin
-  const isAdmin = ["Developer", "Admin"].includes(userPosition);
-
   return (
     <CHeader position="sticky" className="mb-4 bg-light shadow-sm">
       <CHeaderNav className="me-auto">
@@ -35,16 +32,12 @@ export default function AppHeader() {
         <CNavItem>
           <CNavLink href="/myhistory">My History</CNavLink>
         </CNavItem>
-        {isAdmin && (
-          <>
             <CNavItem>
               <CNavLink href="/history">History (Admin)</CNavLink>
             </CNavItem>
             <CNavItem>
               <CNavLink href="/adduser">Add User (Admin)</CNavLink>
             </CNavItem>
-          </>
-        )}
         <CNavItem>
           <CNavLink href="/profile">Profile</CNavLink>
         </CNavItem>
