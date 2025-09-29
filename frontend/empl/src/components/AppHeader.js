@@ -24,7 +24,7 @@ export default function AppHeader() {
   }
 
   // Fungsi helper cek apakah admin
-  const isAdmin = ["Developer", "Admin"].includes(userPosition);
+  const isAdmin = ["developer", "admin"].includes((userPosition || "").toLowerCase().trim());
 
   return (
     <CHeader position="sticky" className="mb-4 bg-light shadow-sm">
